@@ -21,7 +21,7 @@ html {
   padding: 0;
   display: flex;
   place-items: center;
-  font-size: 1.2em;
+  font-size: 24px;
   overflow: hidden;
 }
 
@@ -86,6 +86,20 @@ h2 {
 
 /* Mobile Styles */
 @media (max-width: 650px) {
+  body {
+    font-size: 18px;
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 25.6px;
+  }
+
   .toggleContainer {
     flex-direction: column;
     height: 100px;
