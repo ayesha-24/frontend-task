@@ -18,4 +18,4 @@ Run `npm run dev` to run the development server.
 ## Future features
 
 - Randomisation of answer order
-- Refactor code to make it more modular (which would help with the above randomisation extension)
+- Refactor code to make it easier to maintain and extend

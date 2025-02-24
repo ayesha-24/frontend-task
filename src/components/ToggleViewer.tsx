@@ -53,24 +53,13 @@ export const ToggleView = () => {
   return (
     questions.length > 0 && (
       <div
+        className="pageContainer"
         style={{
           background: getBackgroundColour(),
           transition: "background 0.5s ease",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100vw",
-          height: "100vh",
         }}
       >
-        <div
-          style={{
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <div className="questionContainer">
           <h1 style={{ paddingBottom: "0.5em" }}>{questions[0].question}:</h1>
           {questions[0].answers.map((answer, index) => (
             <div key={index} className="toggleContainer">
@@ -89,12 +78,8 @@ export const ToggleView = () => {
                 }}
               />
               <div
+                className="answerOption"
                 style={{
-                  flex: 1,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  zIndex: 1,
                   cursor: allCorrect ? "not-allowed" : "pointer",
                   height: "100%",
                   color: toggleStates[index] ? "white" : "#9F938B",
@@ -104,12 +89,8 @@ export const ToggleView = () => {
                 {answer.incorrectOption}
               </div>
               <div
+                className="answerOption"
                 style={{
-                  flex: 1,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  zIndex: 1,
                   cursor: allCorrect ? "not-allowed" : "pointer",
                   color: toggleStates[index] ? "#9F938B" : "white",
                 }}
