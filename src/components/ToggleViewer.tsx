@@ -13,10 +13,17 @@ export const ToggleView = () => {
   const [questions, setQuestions] = useState<Questions[]>([]);
   const [toggleStates, setToggleStates] = useState<boolean[]>([]);
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 650);
 
   useEffect(() => {
     setQuestions(questionData as Questions[]);
     setToggleStates(new Array(questionData[0]?.answers.length).fill(false));
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 650);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const allCorrect = correctAnswers === toggleStates.length;
@@ -59,37 +66,26 @@ export const ToggleView = () => {
         <div
           style={{
             textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
           <h1 style={{ paddingBottom: "0.5em" }}>{questions[0].question}:</h1>
           {questions[0].answers.map((answer, index) => (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                borderRadius: "100px",
-                border: "2px solid white",
-                boxShadow: "0px 4px 4px 0px #00000040",
-                position: "relative",
-                width: "600px",
-                height: "32px",
-                padding: "1em",
-                marginBottom: "16px",
-                pointerEvents: allCorrect ? "none" : "auto",
-              }}
-            >
+            <div key={index} className="toggleContainer">
               <div
+                className="slider"
                 style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "50%",
-                  height: "100%",
-                  backgroundColor: "rgba(255, 255, 255, 0.3)",
-                  color: toggleStates[index] ? "white" : "#9F938B",
-                  borderRadius: "40px",
-                  transition: "transform 0.3s ease",
-                  transform: allCorrect || toggleStates[index] ? "translateX(100%)" : "translateX(0)",
+                  borderRadius: isMobile ? (toggleStates[index] ? "0 0 40px 40px" : "40px 40px 0 0") : "40px",
+                  transform:
+                    allCorrect || toggleStates[index]
+                      ? isMobile
+                        ? "translateY(100%)"
+                        : "translateX(100%)"
+                      : isMobile
+                      ? "translateY(0)"
+                      : "translateX(0)",
                 }}
               />
               <div
